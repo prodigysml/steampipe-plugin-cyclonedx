@@ -1,0 +1,25 @@
+version: '3'
+
+tasks:
+  install:
+    cmds:
+      - mkdir -p ~/.steampipe/plugins/local/cyclonedx/
+      - go build -o  ~/.steampipe/plugins/local/cyclonedx/cyclonedx.plugin *.go
+      - mkdir -p ~/.steampipe/config/
+      - cp cyclonedx.spc ~/.steampipe/config/
+
+  clean:
+    cmds:
+      - rm ~/.steampipe/plugins/local/cyclonedx/cyclonedx.plugin
+      - rm ~/.steampipe/config/cyclonedx.spc
+
+  test:
+    deps: [install]
+    cmds:
+      - steampipe query "SELECT * from cyclonedx_bom_info_file"
+      - steampipe query "SELECT * from cyclonedx_metadata"
+      - steampipe query "SELECT * from cyclonedx_tools"
+      - steampipe query "SELECT * from cyclonedx_authors"
+      - steampipe query "SELECT * from cyclonedx_lifecycles"
+      - steampipe query "SELECT * from cyclonedx_components"
+      - steampipe query "SELECT * from cyclonedx_dependencies"

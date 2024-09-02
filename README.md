@@ -1,1 +1,1 @@
-# steampipe-plugin-cyclonedx
+# Steampipe Plugin CycloneDX
