@@ -19,6 +19,12 @@ task install
 SELECT * from cyclonedx_bom_info_file where directory = './examples';
 ```
 
+Finding packages that don't have a reference to `github.com` and `golang.org`
+
+```sql
+SELECT * from cyclonedx_dependencies where ref not like '%github.com%' and ref not like '%golang.org%'
+```
+
 # Test
 
 ```bash
